@@ -43,7 +43,7 @@ export interface IRoom extends Document {
     createdAt: Date
 }
 
-const roomSchema: Schema = new Schema({
+const roomSchema: Schema<IRoom> = new Schema({
     name: {
         type: String,
         required: [true, "Please enter room name"],
@@ -78,7 +78,7 @@ const roomSchema: Schema = new Schema({
         country: String,
     },
     guestCapacity: {
-        type: String,
+        type: Number,
         required: [true, "Please enter room guest capacity"],
     },
     numOfBeds: {
@@ -105,7 +105,7 @@ const roomSchema: Schema = new Schema({
         type: Boolean,
         default: false
     },
-    rating: {
+    ratings: {
         type: Number,
         default: 0,
     },
@@ -133,7 +133,7 @@ const roomSchema: Schema = new Schema({
             message: "Please select correct category for room"
         },
     },
-    reviews: [
+    review: [
         {
             user: {
                 type: mongoose.Schema.Types.ObjectId,
