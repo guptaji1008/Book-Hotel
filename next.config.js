@@ -5,7 +5,10 @@ const nextConfig = {
         db_URI: "",
         API_URL: "http://localhost:3000",
         NEXTAUTH_SECRET: "AMANKUMARGUPTAISAMECHANICALENGINEERFROMIMSENGINEERINGCOLLEGE",
-        NEXTAUTH_URL: "http://localhost:3000"
+        NEXTAUTH_URL: "http://localhost:3000",
+        CLOUDINARY_CLOUD_NAME: "dbrd2j2lo",
+        CLOUDINARY_API_KEY: "544732963741955",
+        CLOUDINARY_API_SECRET: "LlkrKhmuE2klXfqTwmDXDblZvWo"
     },
     images: {
         domains: ["res.cloudinary.com"]

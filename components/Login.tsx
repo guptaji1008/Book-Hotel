@@ -30,7 +30,7 @@ const Login = () => {
   }
 
   return (
-    <div className="row wrapper">
+    <div className="row wrapper wrapper-auth">
       <div className="col-10 col-lg-5">
         <form onSubmit={handleSubmit} className="shadow rounded bg-body">
           <h1 className="mb-3">Login</h1>

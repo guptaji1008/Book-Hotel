@@ -161,12 +161,19 @@ body {
 /* Login & Register */
 
 .wrapper {
-  min-height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
   font-weight: 700;
+}
+
+.wrapper-auth {
+  min-height: 85vh;
+}
+
+.wrapper-update {
+  min-height: 40vh;
 }
 
 .user-dashboard .wrapper {
@@ -406,18 +413,27 @@ footer {
 
 /* Sidebar */
 
+.list-group {
+  background-color: #ececec;
+  padding: 1rem !important;
+}
+
 .list-group-item:first-child {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
 .list-group-item {
-  border: none;
+  background-color: #b3b3b3 !important;
+  color: #222 !important;
+  border: none !important;
+  border-radius: 0.3rem !important;
 }
 
-.list-group-item.active {
-  background-color: #f3f4f6;
-  border-color: #f3f4f6;
-  border-radius: 0.3rem;
-  color: #e61e4d;
+.list-group-item-active {
+  background-color: #cacdd4 !important;
+  border-radius: 0.7rem !important;
+  color: #e61e4d !important;
+  padding: 0.5rem 1rem !important;
+  text-decoration: none;
 }
