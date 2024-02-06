@@ -3,6 +3,9 @@ import { catchAsyncHandler } from "../middleware/catchAsyncErrors";
 import User from "../models/user";
 import ErrorHandler from "../utlis/errorHandlers";
 import { delete_file, upload_file } from "../utlis/cloudinary";
+import { emailTemplate } from "../utlis/emailTemplate";
+import sendEmail from "../utlis/sendMailer";
+import crypto from "crypto";
 
 // Register user => /api/auth/register
 export const registerUser = catchAsyncHandler(async (req: NextRequest) => {
@@ -81,3 +84,73 @@ export const updateAvatar = catchAsyncHandler(async (req: NextRequest) => {
     user,
   });
 });
+
+// Forgot password => /api/password/forgot
+export const forgotPassword = catchAsyncHandler(async (req: NextRequest) => {
+  const body = await req.json();
+
+  const user = await User.findOne({ email: body.email });
+  if (!user) {
+    throw new ErrorHandler("User not found", 404);
+  }
+
+  // Get reset token
+  const resetToken = user.getResetPasswordToken();
+  await user.save();
+
+  const resetUrl = `${process.env.API_URL}/password/reset/${resetToken}`;
+
+  const message = emailTemplate(user?.name, resetUrl);
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Book hotels password recovery",
+      message,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+    //@ts-ignore
+    throw new ErrorHandler(error?.message, 500);
+  }
+
+  return NextResponse.json({
+    success: true,
+    user,
+  });
+});
+
+// Forgot password => /api/password/reset/:token
+export const resetPassword = catchAsyncHandler(
+  async (req: NextRequest, { params }: { params: { token: string } }) => {
+    const body = await req.json();
+
+    const resetPasswordToken = crypto
+      .createHash("sha256")
+      .update(params.token)
+      .digest("hex");
+
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+    if (!user) {
+      throw new ErrorHandler("Token is invalid or expired", 404);
+    }
+
+    // Set the new password
+    user.password = body.password;
+
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    return NextResponse.json({
+      success: true,
+    });
+  }
+);
