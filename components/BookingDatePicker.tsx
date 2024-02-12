@@ -1,6 +1,8 @@
 import { IRoom } from "@/backend/models/room";
-import { useGetBookedDatesQuery, useLazyCheckBookingAvailibilityQuery, useNewBookingMutation } from "@/globalStore/api/bookingApi";
+import { useGetBookedDatesQuery, useLazyCheckBookingAvailibilityQuery, useLazyStripeCheckoutQuery, useNewBookingMutation } from "@/globalStore/api/bookingApi";
+import { useAppSelector } from "@/globalStore/hooks";
 import { calculateNoOfDays } from "@/helper/helper";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,6 +13,9 @@ const BookingDatePicker = ({ room }: { room: IRoom }) => {
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [noOfDays, setNoOfDays] = useState(0);
 
+  const { isAuth } = useAppSelector((state) => state.user)
+  const router = useRouter()
+
   const [newBooking, { isLoading, isSuccess, error }] = useNewBookingMutation();
   const [checkBookingAvailability, { data }] = useLazyCheckBookingAvailibilityQuery();
   const { data: { bookedDates: dates } = {} } = useGetBookedDatesQuery(room?._id)
@@ -18,7 +23,6 @@ const BookingDatePicker = ({ room }: { room: IRoom }) => {
   const excludesDates = dates?.map((date: string) => new Date(date)) || [];
 
   const isAvailable = data?.isAvailable;
-  console.log(data)
 
   const onChange = (dates: Date[]) => {
     const [checkInDate, checkOutDate] = dates;
@@ -47,19 +51,44 @@ const BookingDatePicker = ({ room }: { room: IRoom }) => {
     }
   }, [error, isSuccess])
 
+  const [stripeCheckout, { error: stripeError, isLoading: stripeIsLoading, data: stripeData }] = useLazyStripeCheckoutQuery()
+
+  // const handlePayButton = () => {
+  //   newBooking({
+  //     room: room._id,
+  //     checkInDate,
+  //     checkOutDate,
+  //     daysOfStay: noOfDays,
+  //     amountPaid: room?.pricePerNight * noOfDays,
+  //     paymentInfo: {
+  //       id: "STRIP_ID",
+  //       status: "paid",
+  //     },
+  //   });
+  // };
+
+  useEffect(() => {
+    if (stripeError && 'data' in stripeError) {
+      //@ts-ignore
+      toast.error(stripeError?.data?.message)
+    }
+    if (stripeData) {
+      router.replace(stripeData?.url)
+    }
+  }, [stripeError, stripeData])
+
   const handlePayButton = () => {
-    newBooking({
-      room: room._id,
-      checkInDate,
-      checkOutDate,
+    const amount = room.pricePerNight * noOfDays;
+
+    const checkOutData = {
+      checkInDate: checkInDate.toISOString(),
+      checkOutDate: checkOutDate.toISOString(),
       daysOfStay: noOfDays,
-      amountPaid: room?.pricePerNight * noOfDays,
-      paymentInfo: {
-        id: "STRIP_ID",
-        status: "paid",
-      },
-    });
-  };
+      amount
+    }
+
+    stripeCheckout({ id: room?._id, checkOutData })
+  }
 
   return (
     <div className="booking-card shadow p-4">
@@ -86,15 +115,22 @@ const BookingDatePicker = ({ room }: { room: IRoom }) => {
         </div>
       }
       {
+        isAvailable!== undefined && isAvailable === true && !isAuth && <div className="alert alert-danger py-3">
+          Login to book the room.
+        </div>
+      }
+      {
         isAvailable !== undefined && isAvailable === false && <div className="alert alert-danger py-3">
           Room not available, try again.
         </div>
       }
-      <button className="form-btn w-100 py-3" onClick={handlePayButton} disabled={(isAvailable !== undefined && isAvailable === false) || isLoading}>
+      {
+        isAuth && <button className="form-btn w-100 py-3" onClick={handlePayButton} disabled={(isAvailable !== undefined && isAvailable === false) || isLoading || stripeIsLoading}>
         {
-          isLoading ? <div className='lds-dual-ring'></div> : "Pay"
+          isLoading || stripeIsLoading ? <div className='lds-dual-ring'></div> : "Pay"
         }
       </button>
+      }
     </div>
   );
 };

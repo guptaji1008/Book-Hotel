@@ -45,8 +45,8 @@ const RoomDetails = ({ roomDetails: room }: { roomDetails: IRoom }) => {
         </div>
       </div>
 
-      <NewReview />
-      <ReviewList />
+      <NewReview roomId={room?._id}/>
+      <ReviewList reviews={room?.review} />
     </div>
   );
 };
