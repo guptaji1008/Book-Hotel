@@ -12,3 +12,14 @@ export const isAuthenticatedUser = async (req: NextRequest, event: any, next: an
     req.user = session.user as IUser;
     return next()
 }
+
+export const authorizeRoles = (...roles: string[]) => {
+    return (req: NextRequest, event: any, next: any) => {
+        if (!roles.includes(req.user.role)) {
+            return NextResponse.json({
+                message: `Role ${req.user.role} is not allowed to access this resource.`
+            }, { status: 403 })
+        }
+        return next()
+    }
+}

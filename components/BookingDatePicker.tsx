@@ -73,6 +73,7 @@ const BookingDatePicker = ({ room }: { room: IRoom }) => {
       toast.error(stripeError?.data?.message)
     }
     if (stripeData) {
+      console.log(stripeData)
       router.replace(stripeData?.url)
     }
   }, [stripeError, stripeData])

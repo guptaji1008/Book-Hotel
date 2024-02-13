@@ -7,8 +7,8 @@ import { useEffect } from "react";
 
 const Header = () => {
   const { data } = useSession();
-  const dispatch = useAppDispatch()
-  const { user } = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
 
   const handleLogOut = () => {
     signOut();
@@ -16,10 +16,10 @@ const Header = () => {
 
   useEffect(() => {
     if (data) {
-      dispatch(setUser(data?.user))
-      dispatch(setIsAuth(true))
+      dispatch(setUser(data?.user));
+      dispatch(setIsAuth(true));
     }
-  }, [data])
+  }, [data]);
 
   return (
     <nav className="navbar sticky-top py-2">
@@ -53,8 +53,8 @@ const Header = () => {
                         src={
                           //@ts-ignore
                           user?.avatar
-                          //@ts-ignore
-                            ? user?.avatar?.url
+                            ? //@ts-ignore
+                              user?.avatar?.url
                             : "/images/default_avatar.jpg"
                         }
                         alt="John Doe"
@@ -63,18 +63,18 @@ const Header = () => {
                         width="50"
                       />
                     </figure>
-                    <span className="placeholder-glow ps-1">
-                      {user?.name}
-                    </span>
+                    <span className="placeholder-glow ps-1">{user?.name}</span>
                   </button>
 
                   <div
                     className="dropdown-menu w-100"
                     aria-labelledby="dropdownMenuButton1"
                   >
-                    <Link href="/admin/dashboard" className="dropdown-item">
-                      Dashboard
-                    </Link>
+                    {user?.role === "admin" && (
+                      <Link href="/admin/dashboard" className="dropdown-item">
+                        Dashboard
+                      </Link>
+                    )}
                     <Link href="/bookings/me" className="dropdown-item">
                       My Bookings
                     </Link>
