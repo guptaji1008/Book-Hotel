@@ -3,7 +3,11 @@ import Error from "@/app/error";
 import RoomDetails from "@/components/RoomDetails";
 
 const getRoomsData = async (id: string) => {
-  const res = await fetch(`${process.env.API_URL}/api/rooms/${id}`, {cache: "no-cache"});
+  const res = await fetch(`${process.env.API_URL}/api/rooms/${id}`, {
+    next: {
+      tags: ["RoomDetails"]
+    }
+  });
   return res.json();
 };
 

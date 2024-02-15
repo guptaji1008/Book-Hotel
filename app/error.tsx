@@ -12,7 +12,7 @@ export default function Error({
     <div>
       <div className='d-flex justify-content-center align-items-center vh-100'>
         <div className='text-center'>
-            <h2 className='display-4 fw-bold'>{error?.message}</h2>
+            <h3 className='display-4 fw-bold'>{error?.message}</h3>
             <p className='fs-3'>
                 <span className='text-danger'>Oop!</span> Something went wrong!
             </p>

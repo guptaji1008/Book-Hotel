@@ -40,8 +40,8 @@ const DashBoard = () => {
 
   return (
     <div className="ps-4 my-5">
-      <div className="d-flex justify-content-start align-items-center">
-        <div className="mb-3 me-4">
+      <div className="d-flex justify-content-between align-items-center">
+        <div className="mb-3">
           <label className="form-label d-block">Start Date</label>
           <DatePicker
             selected={startDate}
@@ -64,11 +64,11 @@ const DashBoard = () => {
             className="form-control"
           />
         </div>
-        <button className="form-btn ms-4 mt-3 px-5 py-2" disabled={isLoading}  onClick={handleSubmit}>{isLoading ? <div className='lds-dual-ring'></div> : "Fetch"}</button>
+        <button className="form-btn mt-3 px-5 py-2" disabled={isLoading}  onClick={handleSubmit}>{isLoading ? <div className='lds-dual-ring'></div> : "Fetch"}</button>
       </div>
       <SalesStats data={data}/>
-      <div className="row">
-        <div className="col-12 col-lg-8">
+      <div className="row gap-1">
+        <div className="col-12 col-lg-7">
           <h4 className="my-5 text-center">Sales History</h4>
           <SalesChart salesData={data?.lastSixMonthsData}/>
         </div>
@@ -76,9 +76,9 @@ const DashBoard = () => {
         <div className="col-12 col-lg-4 text-center">
           <h4 className="my-5">Top Performing Rooms</h4>
           {data?.topPerformingRooms.length > 0  ? (
-            <TopPerformingChart topRooms={data?.topPerformingRooms}/>
+            <div className="text-center"><TopPerformingChart topRooms={data?.topPerformingRooms}/></div>
           ) : (
-            <p className="mt-5">No data available</p>
+            <p className="mt-5 text-center">No data available</p>
           )}
         </div>
       </div>

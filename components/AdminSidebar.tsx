@@ -10,7 +10,7 @@ const AdminSidebar = () => {
   const [select, setSelect] = useState(0)
   const pathname = usePathname()
 
-  const menuItem = [
+  const menuItem: { name: string, url: string, iconNo: number }[] = [
     {
       name: "Dashboard",
       url: "/admin/dashboard",
@@ -40,11 +40,10 @@ const AdminSidebar = () => {
 
   useEffect(() => {
     if (pathname) {
-      //@ts-ignore
-      const { iconNo } = menuItem.find((i) => i.url === pathname)
-      setSelect(iconNo)
+      const [item] = menuItem.filter((i) => pathname.startsWith(i.url))
+      setSelect(item?.iconNo)
     }
-  }, [])
+  }, [pathname])
 
   return (
     <div className="list-group mt-lg-5 pl-4 gap-2">

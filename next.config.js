@@ -16,7 +16,8 @@ const nextConfig = {
         EMAIL_FROM_EMAIL: "noreply@bookhotels.com",
         EMAIL_FROM_NAME: "BOOK HOTELS",
         STRIPE_SECRET_KEY: "sk_test_51OgmFRSD4Cc8c1pOsFfMzC7gNNCPd3JQfWffb7tBQFGbni6Yh3vzfIqeBaDYGXOdaNgzHeKykc1ctZ6nNvhqiCzn00ejXvU6Vj",
-        STRIPE_WEBHOOKS_SECRET: "whsec_c963ca81a633be477cc1f663214c37c043cd7e5133a31a7755f54677c1c2bf97"
+        STRIPE_WEBHOOKS_SECRET: "whsec_c963ca81a633be477cc1f663214c37c043cd7e5133a31a7755f54677c1c2bf97",
+        REVALIDATE_TOKEN: "AMANKUMARGUPTAMECHANICALENGINEER27121998"
     },
     images: {
         domains: ["res.cloudinary.com"]

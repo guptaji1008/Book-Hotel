@@ -16,10 +16,49 @@ export const roomApi = createApi({
         url: `/reviews/can_review?roomId=${id}`,
       }),
     }),
+    newRoom: builder.mutation({
+      query: (body) => ({
+        url: "/admin/rooms",
+        method: "POST",
+        body
+      })
+    }),
+    updateRoom: builder.mutation({
+      query: ({id, body}) => ({
+        url: `/admin/rooms/${id}`,
+        method: "PUT",
+        body
+      })
+    }),
+    uploadRoomImages: builder.mutation({
+      query: ({id, body}) => ({
+        url: `/admin/rooms/${id}/upload_images`,
+        method: "PUT",
+        body
+      })
+    }),
+    deleteRoomImage: builder.mutation({
+      query: ({id, body}) => ({
+        url: `/admin/rooms/${id}/delete_image`,
+        method: "PUT",
+        body
+      })
+    }),
+    deleteRoom: builder.mutation({
+      query: (id) => ({
+        url: `/admin/rooms/${id}`,
+        method: "DELETE",
+      })
+    }),
   }),
 });
 
 export const {
   usePostReviewMutation,
-  useCanUserReviewQuery
+  useCanUserReviewQuery,
+  useNewRoomMutation,
+  useUpdateRoomMutation,
+  useUploadRoomImagesMutation,
+  useDeleteRoomImageMutation,
+  useDeleteRoomMutation
 } = roomApi;

@@ -154,7 +154,7 @@ const roomSchema: Schema<IRoom> = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: false
+        required: true
     },
     createdAt: {
         type: Date,
