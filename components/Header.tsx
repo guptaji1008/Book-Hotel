@@ -2,6 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/globalStore/hooks";
 import { setIsAuth, setUser } from "@/globalStore/slices/userSlice";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -27,10 +28,12 @@ const Header = () => {
         <div className="p-0">
           <div className="navbar-brand">
             <Link href="/">
-              <img
+              <Image
                 style={{ cursor: "pointer" }}
-                src="/images/bookit_logo.png"
+                src="/images/logo.png"
                 alt="BookIT"
+                width={200}
+                height={40}
               />
             </Link>
           </div>

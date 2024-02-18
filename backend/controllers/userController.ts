@@ -154,3 +154,73 @@ export const resetPassword = catchAsyncHandler(
     });
   }
 );
+
+// Get all users => /api/admin/users
+export const allUsers = catchAsyncHandler(async (req: NextRequest) => {
+  const users = await User.find();
+
+  return NextResponse.json({
+    success: true,
+    users,
+  });
+});
+
+// Get single user details => /api/admin/users/:id
+export const getUserDetails = catchAsyncHandler(
+  async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const user = await User.findById(params?.id);
+
+    if (!user) {
+      throw new ErrorHandler("User not found", 404);
+    }
+
+    return NextResponse.json({
+      success: true,
+      user,
+    });
+  }
+);
+
+// Update user details => /api/admin/users/:id
+export const updateUserDetails = catchAsyncHandler(
+  async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const body = await req.json()
+    const user = await User.findById(params?.id);
+
+    if (!user) {
+      throw new ErrorHandler("User not found", 404);
+    }
+
+    const { name, email, role } = body;
+
+    const updateUserData = { name, email, role };
+
+    const updatedUser = await User.findByIdAndUpdate(params?.id, updateUserData);
+
+    return NextResponse.json({
+      success: true,
+      user: updatedUser,
+    });
+  }
+);
+
+// Delete User => /api/admin/users/:id
+export const deleteUser = catchAsyncHandler(
+  async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const user = await User.findById(params?.id);
+
+    if (!user) {
+      throw new ErrorHandler("User not found", 404);
+    }
+
+    if (user?.avatar?.public_id) {
+      await delete_file(user?.avatar?.public_id)
+    }
+
+    await user.deleteOne();
+
+    return NextResponse.json({
+      success: true,
+    });
+  }
+);

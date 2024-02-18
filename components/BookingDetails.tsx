@@ -1,4 +1,7 @@
+'use client';
+
 import { IBooking } from "@/backend/models/booking";
+import { useAppSelector } from "@/globalStore/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import { FaPrint } from "react-icons/fa";
@@ -12,6 +15,8 @@ interface Props {
 const BookingDetails = ({ data }: Props) => {
   const booking = data?.booking;
   const isPaid = booking?.paymentInfo?.status === "paid" ? true : false;
+
+  const { user } = useAppSelector(state => state.user)
 
   return (
     <div className="container">
@@ -78,13 +83,24 @@ const BookingDetails = ({ data }: Props) => {
                   </b>
                 </td>
               </tr>
+              {
+                user?.role === "admin" && <tr>
+                <th scope="row">Stripe ID:</th>
+                <td>
+                  <b>
+                    {booking?.paymentInfo?.id}
+                  </b>
+                </td>
+              </tr>
+              }
             </tbody>
           </table>
 
           <h4 className="mt-5 mb-4">Booked Room:</h4>
 
           <hr />
-          <div className="cart-item my-1">
+          {
+            booking?.room ? <div className="cart-item my-1">
             <div className="row my-5">
               <div className="col-4 col-lg-2">
                 <Image
@@ -109,7 +125,10 @@ const BookingDetails = ({ data }: Props) => {
                 <p>{booking?.daysOfStay} Day(s)</p>
               </div>
             </div>
-          </div>
+          </div> : (
+            <div className="alert alert-danger">Room no longer exist, you will get your refund in 3-4 business days.</div>
+          )
+          }
           <hr />
         </div>
       </div>

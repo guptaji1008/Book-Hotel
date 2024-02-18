@@ -102,12 +102,40 @@ export const bookingDetails = catchAsyncHandler(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
     const booking = await Booking.findById(params.id).populate("user room");
 
-    if (booking.user?._id?.toString() !== req.user._id) {
+    if (booking.user?._id?.toString() !== req?.user?._id && req?.user?.role !== "admin") {
       throw new ErrorHandler("You cannot view this booking", 403);
     }
 
     return NextResponse.json({
       booking,
+    });
+  }
+);
+
+// Get all users booking => /api/admin/bookings
+export const allBookings = catchAsyncHandler(
+  async (req: NextRequest) => {
+    const bookings = await Booking.find();
+
+    return NextResponse.json({
+      bookings,
+    });
+  }
+);
+
+// Delete booking => /api/admin/bookings/:id
+export const deleteBooking = catchAsyncHandler(
+  async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const booking = await Booking.findById(params?.id);
+
+    if (!booking) {
+      throw new ErrorHandler("Booking not found", 404);
+    }
+
+    await booking?.deleteOne()
+
+    return NextResponse.json({
+      success: true,
     });
   }
 );

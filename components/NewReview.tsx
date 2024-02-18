@@ -1,4 +1,5 @@
 import { useCanUserReviewQuery, usePostReviewMutation } from "@/globalStore/api/roomApi";
+import { revalidateTag } from "@/helper/revalidate";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -16,8 +17,10 @@ const NewReview = ({ roomId }: { roomId: string }) => {
     if (error && "data" in error) {
       //@ts-ignore
       toast.error(error?.data?.message);
+      console.log(error?.data)
     }
     if (isSuccess) {
+      revalidateTag("RoomDetails")
       toast.success("Review Posted");
       router.refresh();
     }
