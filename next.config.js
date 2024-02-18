@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
-        DB_LOCAL_URI: "mongodb://127.0.0.1:27017/hotel-booking",
-        db_URI: "mongodb+srv://hotelbooking:hotelbooking123@cluster0.gqdumua.mongodb.net/hotel-booking?retryWrites=true&w=majority",
+        DB_LOCAL_URI: "mongodb+srv://hotelbooking:hotelbooking123@cluster0.gqdumua.mongodb.net/hotel-booking?retryWrites=true&w=majority",
+        DB_URI: "mongodb+srv://hotelbooking:hotelbooking123@cluster0.gqdumua.mongodb.net/hotel-booking?retryWrites=true&w=majority",
         API_URL: "https://hotelbooker.netlify.app",
         NEXTAUTH_SECRET: "AMANKUMARGUPTAISAMECHANICALENGINEERFROMIMSENGINEERINGCOLLEGE",
         NEXTAUTH_URL: "https://hotelbooker.netlify.app",

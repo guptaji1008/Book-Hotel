@@ -17,13 +17,13 @@ const getRoomsData = async (searchParams: string) => {
     });
     return res.json();
   } catch (error) {
-    console.log(error)
+    return console.log(error)
   }
 };
 
 const HomePage = async ({ searchParams }: { searchParams: string }) => {
   const data = await getRoomsData(searchParams);
-
+  
   if (data?.message) {
     return <Error error={data} />;
   }
