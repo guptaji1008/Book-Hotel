@@ -3,9 +3,9 @@ const nextConfig = {
     env: {
         DB_LOCAL_URI: "mongodb://127.0.0.1:27017/hotel-booking",
         db_URI: "mongodb+srv://hotelbooking:hotelbooking123@cluster0.gqdumua.mongodb.net/hotel-booking?retryWrites=true&w=majority",
-        API_URL: "http://localhost:3000",
+        API_URL: "https://hotelbooker.netlify.app",
         NEXTAUTH_SECRET: "AMANKUMARGUPTAISAMECHANICALENGINEERFROMIMSENGINEERINGCOLLEGE",
-        NEXTAUTH_URL: "http://localhost:3000",
+        NEXTAUTH_URL: "https://hotelbooker.netlify.app",
         CLOUDINARY_CLOUD_NAME: "dbrd2j2lo",
         CLOUDINARY_API_KEY: "544732963741955",
         CLOUDINARY_API_SECRET: "LlkrKhmuE2klXfqTwmDXDblZvWo",
