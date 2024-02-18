@@ -9,12 +9,16 @@ export const metadata = {
 const getRoomsData = async (searchParams: string) => {
   const urlParams = new URLSearchParams(searchParams);
   const queryString = urlParams.toString();
-  const res = await fetch(`${process.env.API_URL}/api/rooms?${queryString}`, {
-    next: {
-      tags: ["RoomDetails"]
-    }
-  });
-  return res.json();
+  try {
+    const res = await fetch(`${process.env.API_URL}/api/rooms?${queryString}`, {
+      next: {
+        tags: ["RoomDetails"]
+      }
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 const HomePage = async ({ searchParams }: { searchParams: string }) => {
