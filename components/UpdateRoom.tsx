@@ -233,8 +233,8 @@ const UpdateRoom = ({ data }: Props) => {
           <label className="mb-3">Room Features</label>
           {/* <!-- Room Features (Add more options as needed) --> */}
 
-          {roomFeatures.map((item) => (
-            <div className="form-check">
+          {roomFeatures.map((item, ind) => (
+            <div className="form-check" key={ind}>
               <input
                 className="form-check-input"
                 type="checkbox"

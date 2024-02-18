@@ -10,7 +10,7 @@ const ReviewList = ({ reviews }: { reviews: IReview[] }) => {
       {reviews?.map((review) => (
         <div className="review-card my-3">
           {/* <!-- Review Content goes here --> */}
-          <div className="row">
+          <div className="row" key={review?._id}>
             <div className="col-3 col-lg-1">
               <img
                 src={

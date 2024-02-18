@@ -222,7 +222,7 @@ const NewRoom = () => {
           <label className="mb-3">Room Features</label>
           {/* <!-- Room Features (Add more options as needed) --> */}
 
-          {roomFeatures.map((item) => (
+          {roomFeatures.map((item, ind) => (
             <div className="form-check">
               <input
                 className="form-check-input"
@@ -232,6 +232,7 @@ const NewRoom = () => {
                 value={item?.value}
                 onChange={onChange}
                 checked={!!roomDetails[item?.value]}
+                key={ind}
               />
               <label className="form-check-label" htmlFor={item?.value}>
                 {item?.name}

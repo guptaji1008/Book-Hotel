@@ -46,7 +46,7 @@ const UploadRoomImages = ({ data }: Props) => {
       router.refresh();
       toast.success("Image Uploaded");
     }
-  }, [error, isSuccess]);
+  }, [error, isSuccess, router]);
 
   useEffect(() => {
     if (deleteError && "data" in deleteError) {
@@ -59,7 +59,7 @@ const UploadRoomImages = ({ data }: Props) => {
       router.refresh();
       toast.success("Image Deleted");
     }
-  }, [deleteError, deleteSuccess]);
+  }, [deleteError, deleteSuccess, router]);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const files = Array.from(e.target.files || []);
@@ -135,8 +135,8 @@ const UploadRoomImages = ({ data }: Props) => {
                   <p className="text-warning">New Images:</p>
                   <div className="row mt-4">
                     {/* <!-- Example of a single image preview, you can repeat this structure for multiple images --> */}
-                    {imagesPreview.map((image) => (
-                      <div className="col-md-3 mt-2">
+                    {imagesPreview.map((image, ind) => (
+                      <div className="col-md-3 mt-2" key={ind}>
                         <div className="card">
                           <Image
                             src={image}
@@ -169,8 +169,8 @@ const UploadRoomImages = ({ data }: Props) => {
                   <p className="text-success">Room Uploaded Images:</p>
                   <div className="row mt-1">
                     {/* <!-- Example of a single uploaded image, you can repeat this structure for multiple images --> */}
-                    {uploadedImages.map((image) => (
-                      <div className="col-md-3 mt-2">
+                    {uploadedImages.map((image, ind) => (
+                      <div className="col-md-3 mt-2" key={ind}>
                         <div className="card">
                           <Image
                             src={image?.url}

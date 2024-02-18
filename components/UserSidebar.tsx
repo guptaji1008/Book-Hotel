@@ -34,7 +34,7 @@ const UserSidebar = () => {
       const { iconNo } = menuItem.find((i) => i.url === pathname)
       setSelect(iconNo)
     }
-  }, [])
+  }, [menuItem, pathname])
 
   return (
     <div className="list-group mt-lg-5 pl-4 gap-2">

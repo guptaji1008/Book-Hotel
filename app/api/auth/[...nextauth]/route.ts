@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import db from "@/backend/config/db";
 import User, { IUser } from "@/backend/models/user";
 import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
 
 type Credentials = {
   email: string;
@@ -14,7 +15,7 @@ type Token = {
   user: IUser
 }
 
-async function auth(req: NextApiRequest, res: NextApiResponse) {
+async function auth(req: NextRequest, res: any) {
   return NextAuth(req, res, {
     session: {
       strategy: "jwt",

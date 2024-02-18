@@ -1,0 +1,77 @@
+[{
+  "_id": {
+    "$oid": "65afb0c1fb1f8c9526da8b26"
+  },
+  "name": "Aman Gupta",
+  "email": "aman123@gmail.com",
+  "password": "$2b$10$FuGTH8wwV0uoiZXvdNQQhubfK4S6sVClLKgqp/X/urq/0zQPtW4/a",
+  "role": "user",
+  "createdAt": {
+    "$date": "2024-01-23T12:27:45.441Z"
+  },
+  "__v": 0,
+  "avatar": {
+    "public_id": "Book hotels/avatars/j8nkook3dxajvkptrzin",
+    "url": "http://res.cloudinary.com/dbrd2j2lo/image/upload/v1706203323/Book%20hotels/avatars/j8nkook3dxajvkptrzin.jpg"
+  }
+},
+{
+  "_id": {
+    "$oid": "65b0ee70f05edb3e5ff62d7f"
+  },
+  "name": "Anuj Gupta",
+  "email": "anuj12345@gmail.com",
+  "password": "$2b$10$bhmAGAty3yhKyo6jnErQSOV93R4WpQhDle2EH3Tm.39b5.gYhAB0u",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2024-01-24T11:03:12.371Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c9bf9b039cfeb6f57276c7"
+  },
+  "name": "Admin Aman",
+  "email": "admin@gmail.com",
+  "password": "$2b$10$bKiBXKkICfwLVIRoTrn2CeBEDPMrHUNPe.6cwMwEt3t.sB6coCyUy",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2024-02-12T06:50:03.953Z"
+  },
+  "__v": 0,
+  "avatar": {
+    "public_id": "Book hotels/avatars/zjuddwg4n3obril44ljc",
+    "url": "http://res.cloudinary.com/dbrd2j2lo/image/upload/v1707720809/Book%20hotels/avatars/zjuddwg4n3obril44ljc.jpg"
+  }
+},
+{
+  "_id": {
+    "$oid": "65d092330072f00a8a9aa057"
+  },
+  "name": "Priyanshu Pandey",
+  "email": "pandey@gmail.com",
+  "password": "$2b$10$On0Pj4xR1XRSMhX57iLCeerE.jkW3WBITU1iUJRjIpilITyCmG7Lm",
+  "role": "user",
+  "createdAt": {
+    "$date": "2024-02-17T11:02:11.306Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d092660072f00a8a9aa05a"
+  },
+  "name": "Rahul Tiwari",
+  "email": "rahul@gmail.com",
+  "password": "$2b$10$Y9HZuehq59pLpkuEi8Z/K.w9eviiFcf64IUIIzED0CV7AWoJ.PIKi",
+  "role": "user",
+  "createdAt": {
+    "$date": "2024-02-17T11:03:02.634Z"
+  },
+  "__v": 0,
+  "avatar": {
+    "public_id": "Book hotels/avatars/omchegw7sgwudxakkhmb",
+    "url": "http://res.cloudinary.com/dbrd2j2lo/image/upload/v1708167851/Book%20hotels/avatars/omchegw7sgwudxakkhmb.jpg"
+  }
+}]

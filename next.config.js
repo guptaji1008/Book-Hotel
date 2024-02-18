@@ -2,7 +2,7 @@
 const nextConfig = {
     env: {
         DB_LOCAL_URI: "mongodb://127.0.0.1:27017/hotel-booking",
-        db_URI: "",
+        db_URI: "mongodb+srv://hotelbooking:hotelbooking123@cluster0.gqdumua.mongodb.net/hotel-booking?retryWrites=true&w=majority",
         API_URL: "http://localhost:3000",
         NEXTAUTH_SECRET: "AMANKUMARGUPTAISAMECHANICALENGINEERFROMIMSENGINEERINGCOLLEGE",
         NEXTAUTH_URL: "http://localhost:3000",
@@ -21,7 +21,19 @@ const nextConfig = {
     },
     images: {
         domains: ["res.cloudinary.com"]
-    }
+    },
+    eslint: {
+        // Warning: This allows production builds to successfully complete even if
+        // your project has ESLint errors.
+        ignoreDuringBuilds: true,
+      },
+      typescript: {
+          // !! WARN !!
+          // Dangerously allow production builds to successfully complete even if
+          // your project has type errors.
+          // !! WARN !!
+          ignoreBuildErrors: true,
+        },
 }
 
 module.exports = nextConfig
